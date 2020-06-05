@@ -3,10 +3,25 @@
   margin-right: auto;
   width: 650px;
 }
+body{
+    text-align: center;
+}
 
 #greeting-container {
   margin-top: 20px;
 }
 img{
     width: 300px;
+}
+table{
+    border-style: double;
+    border-collapse: collapse;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+th, td{
+    padding: 5px;
+    border-style: double;
 }
