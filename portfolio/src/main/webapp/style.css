@@ -7,8 +7,9 @@ body{
     text-align: center;
 }
 
-#greeting-container {
+#fact-container {
   margin-top: 20px;
+  color: cornflowerblue;
 }
 img{
     width: 300px;
