@@ -26,3 +26,9 @@ th, td{
     padding: 5px;
     border-style: double;
 }
+a:link{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
