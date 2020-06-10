@@ -3,7 +3,55 @@
   margin-right: auto;
   width: 650px;
 }
+body{
+    text-align: center;
+    background-color: rgb(244, 220, 248);
+    font-family: sans-serif;
+}
 
-#greeting-container {
+#fact-container {
   margin-top: 20px;
+  color: cornflowerblue;
+}
+
+img{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+table{
+    border-style: double;
+    border-collapse: collapse;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+thead{
+    font-weight: bold;
+}
+th, td{
+    padding: 5px;
+    border-style: double;
+}
+a:link{
+    text-decoration: none;
+    /* color: black; */
+}
+a:visited{
+    color:cornflowerblue;
+}
+a:active{
+    color: purple;
+}
+a:hover{
+    text-decoration: underline;
+}
+ul{
+    list-style-type: none;
+}
+button{
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 5px;
 }
