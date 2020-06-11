@@ -26,3 +26,8 @@ function addRandomFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+async function getData() {
+  const response = await fetch('/data');
+  const data = await response.text();
+  document.getElementById('data-container').innerHTML = data;
+}
