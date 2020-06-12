@@ -26,8 +26,27 @@ function addRandomFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
-async function getData() {
-  const response = await fetch('/data');
-  const data = await response.text();
-  document.getElementById('data-container').innerHTML = data;
+function getData() {
+  fetch('/data').then(response => response.json()).then((data) => {
+    // data is an object, not a string, so we have to
+    // reference its fields to create HTML content
+    console.log(data.comment1);
+    console.log(data.comment2);
+    console.log(data.comment3);
+
+    const dataListElement = document.getElementById('data-container');
+    dataListElement.innerHTML = '';
+    dataListElement.appendChild(
+        createListElement('Comment 1: ' + data.comment1));
+    dataListElement.appendChild(
+        createListElement('Comment 2: ' + data.comment2));
+    dataListElement.appendChild(
+        createListElement('Comment 3: ' + data.comment3));
+  });
+}
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }

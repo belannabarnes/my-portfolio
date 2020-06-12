@@ -35,7 +35,7 @@ public class DataServlet extends HttpServlet {
        comments.add("Hola Mundo!");
        comments.add("Hallo Welt!");
        response.setContentType("application/json;");
-       String json = convertToJsonUsingGson(comments);
+       String json = convertToJson(comments);
        response.getWriter().println(json); 
        comments.clear();
     }
@@ -48,13 +48,13 @@ public class DataServlet extends HttpServlet {
    */
   private String convertToJson(ArrayList<String> comments) {
     String json = "{";
-    json += "\"Comment 1\": ";
+    json += "\"comment1\": ";
     json += "\"" + comments.get(0) + "\"";
     json += ", ";
-    json += "\"Comment 2\": ";
+    json += "\"comment2\": ";
     json += "\"" + comments.get(1) + "\"";
     json += ", ";
-    json += "\"Comment 3\": ";
+    json += "\"comment3\": ";
     json += "\"" + comments.get(2) + "\"";
     json += "}";
     return json;
