@@ -19,14 +19,54 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import com.google.gson.Gson;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+    private ArrayList<String> comments = new ArrayList<String>();
+    
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello B'Elanna!</h1>");
+    
+    synchronized(comments){
+       comments.add("Hello World!");
+       comments.add("Hola Mundo!");
+       comments.add("Hallo Welt!");
+       response.setContentType("application/json;");
+       String json = convertToJsonUsingGson(comments);
+       response.getWriter().println(json); 
+       comments.clear();
+    }
+    
+    
+  }
+
+  /**
+   * Converts a ServerStats instance into a JSON string using manual String concatentation.
+   */
+  private String convertToJson(ArrayList<String> comments) {
+    String json = "{";
+    json += "\"Comment 1\": ";
+    json += "\"" + comments.get(0) + "\"";
+    json += ", ";
+    json += "\"Comment 2\": ";
+    json += "\"" + comments.get(1) + "\"";
+    json += ", ";
+    json += "\"Comment 3\": ";
+    json += "\"" + comments.get(2) + "\"";
+    json += "}";
+    return json;
+  }
+
+  /**
+   * Converts a ServerStats instance into a JSON string using the Gson library. Note: We first added
+   * the Gson library dependency to pom.xml.
+   */
+  private String convertToJsonUsingGson(ArrayList<String> comments) {
+    Gson gson = new Gson();
+    String json = gson.toJson(comments);
+    return json;
   }
 }
