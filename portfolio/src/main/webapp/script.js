@@ -30,18 +30,19 @@ function getData() {
   fetch('/data').then(response => response.json()).then((data) => {
     // data is an object, not a string, so we have to
     // reference its fields to create HTML content
-    console.log(data.comment1);
-    console.log(data.comment2);
-    console.log(data.comment3);
+    console.log(data);
+    console.log(data[0]);
+    console.log(data[1]);
+    console.log(data[2]);
 
     const dataListElement = document.getElementById('data-container');
     dataListElement.innerHTML = '';
     dataListElement.appendChild(
-        createListElement('Comment 1: ' + data.comment1));
+        createListElement('Comment 1: ' + data[0]));
     dataListElement.appendChild(
-        createListElement('Comment 2: ' + data.comment2));
+        createListElement('Comment 2: ' + data[1]));
     dataListElement.appendChild(
-        createListElement('Comment 3: ' + data.comment3));
+        createListElement('Comment 3: ' + data[2]));
   });
 }
 /** Creates an <li> element containing text. */

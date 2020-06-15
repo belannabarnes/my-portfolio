@@ -35,29 +35,12 @@ public class DataServlet extends HttpServlet {
        comments.add("Hola Mundo!");
        comments.add("Hallo Welt!");
        response.setContentType("application/json;");
-       String json = convertToJson(comments);
+       String json = convertToJsonUsingGson(comments);
        response.getWriter().println(json); 
        comments.clear();
     }
     
     
-  }
-
-  /**
-   * Converts a ServerStats instance into a JSON string using manual String concatentation.
-   */
-  private String convertToJson(ArrayList<String> comments) {
-    String json = "{";
-    json += "\"comment1\": ";
-    json += "\"" + comments.get(0) + "\"";
-    json += ", ";
-    json += "\"comment2\": ";
-    json += "\"" + comments.get(1) + "\"";
-    json += ", ";
-    json += "\"comment3\": ";
-    json += "\"" + comments.get(2) + "\"";
-    json += "}";
-    return json;
   }
 
   /**
