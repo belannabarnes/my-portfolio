@@ -26,6 +26,7 @@ function addRandomFact() {
   const factContainer = document.getElementById('fact-container');
   factContainer.innerText = fact;
 }
+
 function getData() {
   fetch('/data').then(response => response.json()).then((data) => {
     // data is an object, not a string, so we have to
