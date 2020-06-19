@@ -31,17 +31,21 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     synchronized(comments){
-       comments.add("Hello World!");
-       comments.add("Hola Mundo!");
-       comments.add("Hallo Welt!");
        response.setContentType("application/json;");
        String json = convertToJsonUsingGson(comments);
        response.getWriter().println(json); 
-       comments.clear();
     }
     
-    
   }
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      //get input from the form
+      String text = request.getParameter("comment-input");
+      comments.add(text);
+
+      // Redirect back to the HTML page.
+      response.sendRedirect("/index.html");
+  }
+
 
   /**
    * Converts a ServerStats instance into a JSON string using the Gson library. Note: We first added
