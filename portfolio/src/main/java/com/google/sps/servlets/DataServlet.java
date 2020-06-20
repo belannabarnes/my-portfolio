@@ -45,6 +45,12 @@ public class DataServlet extends HttpServlet {
       String text = request.getParameter("comment-input");
       comments.add(text);
 
+      Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("text", text);
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
+
       // Redirect back to the HTML page.
       response.sendRedirect("/index.html");
   }
