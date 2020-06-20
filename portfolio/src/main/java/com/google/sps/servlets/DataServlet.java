@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
+import com.google.sps.data.Task;
 import com.google.gson.Gson;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -35,11 +37,21 @@ public class DataServlet extends HttpServlet {
     
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
     
+    // ArrayList<String> comments = new ArrayList<String>();
+    for (Entity entity : results.asIterable()) {
+      String text = (String) entity.getProperty("text");
+
+      comments.add(text);
+    }
     synchronized(comments){
-       response.setContentType("application/json;");
-       String json = convertToJsonUsingGson(comments);
-       response.getWriter().println(json); 
+      response.setContentType("application/json;");
+      String json = convertToJsonUsingGson(comments);
+      response.getWriter().println(json); 
+      comments.clear();
     }
     
   }
