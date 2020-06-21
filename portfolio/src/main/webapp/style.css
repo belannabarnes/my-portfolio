@@ -55,3 +55,7 @@ button{
     border-width: 1px;
     padding: 5px;
 }
+
+textarea {
+    width: 35%;
+}

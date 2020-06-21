@@ -9,6 +9,13 @@
   <body onload="getData()">
     <div id="content">
       <h1>B'Elanna's Portfolio</h1>
+      <form action="/data" method="POST">
+        <p>Comment:</p>
+        <textarea name = "comment-input" placeholder="Have a comment? Type it here!"></textarea>
+        <br/><br/>
+        <input type="submit" />
+      </form>
+      <br>
       <div id="data-container"></div>
       <h2>Intro</h2>
       <p>My name is B'Elanna Barnes, but my friends like to call me Lanna. I'm from North Little Rock, Arkansas, and am a rising junior at <abbr title="aka WashU">Washington University in St. Louis</abbr>. I am a computer science major and human-computer interaction minor.</p>

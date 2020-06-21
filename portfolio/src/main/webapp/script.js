@@ -38,12 +38,9 @@ function getData() {
 
     const dataListElement = document.getElementById('data-container');
     dataListElement.innerHTML = '';
-    dataListElement.appendChild(
-        createListElement('Comment 1: ' + data[0]));
-    dataListElement.appendChild(
-        createListElement('Comment 2: ' + data[1]));
-    dataListElement.appendChild(
-        createListElement('Comment 3: ' + data[2]));
+    data.forEach((item, index) => {
+      dataListElement.appendChild(createListElement(`Comment ${index+1}: ${item}`));
+    });
   });
 }
 /** Creates an <li> element containing text. */
