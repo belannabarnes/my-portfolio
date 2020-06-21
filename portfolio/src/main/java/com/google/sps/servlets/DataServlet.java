@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import com.google.gson.Gson;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -42,13 +45,19 @@ public class DataServlet extends HttpServlet {
       String text = request.getParameter("comment-input");
       comments.add(text);
 
+      Entity commentEntity = new Entity("Comment");
+      commentEntity.setProperty("text", text);
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(commentEntity);
+
       // Redirect back to the HTML page.
       response.sendRedirect("/index.html");
   }
 
 
   /**
-   * Converts a ServerStats instance into a JSON string using the Gson library. Note: We first added
+   * Converts a Comments instance into a JSON string using the Gson library. Note: We first added
    * the Gson library dependency to pom.xml.
    */
   private String convertToJsonUsingGson(ArrayList<String> comments) {
