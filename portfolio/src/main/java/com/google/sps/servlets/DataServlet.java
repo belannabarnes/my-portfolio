@@ -24,6 +24,9 @@ import com.google.gson.Gson;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -32,18 +35,25 @@ public class DataServlet extends HttpServlet {
     
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
     
+    for (Entity entity : results.asIterable()) {
+      String text = (String) entity.getProperty("text");
+      comments.add(text);
+    }
     synchronized(comments){
-       response.setContentType("application/json;");
-       String json = convertToJsonUsingGson(comments);
-       response.getWriter().println(json); 
+      response.setContentType("application/json;");
+      String json = convertToJsonUsingGson(comments);
+      response.getWriter().println(json); 
+      comments.clear();
     }
     
   }
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       //Get input from the form.
       String text = request.getParameter("comment-input");
-      comments.add(text);
 
       Entity commentEntity = new Entity("Comment");
       commentEntity.setProperty("text", text);
