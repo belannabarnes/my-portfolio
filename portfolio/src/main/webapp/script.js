@@ -39,7 +39,9 @@ function getData() {
     const dataListElement = document.getElementById('data-container');
     dataListElement.innerHTML = '';
     data.forEach((item, index) => {
-      dataListElement.appendChild(createListElement('Comment ' + (index+1) + ': ' + item));
+      var index = index+1;
+      var item = item;
+      dataListElement.appendChild(createListElement(`Comment ${index}: ${item}`));
     });
   });
 }
