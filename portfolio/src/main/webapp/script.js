@@ -49,3 +49,28 @@ function createListElement(text) {
   liElement.innerText = text;
   return liElement;
 }
+
+google.charts.load('current', {'packages':['table']});
+google.charts.setOnLoadCallback(drawTable);
+
+function drawTable() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Course Name');
+    data.addColumn('string', 'When it Was Taken');
+    data.addColumn('boolean', 'Required Class');
+    data.addRows([
+        ['Intro to Computer Science', 'Fall 2018', true],
+        ['First-Year Engineering Seminar', 'Fall 2018',  false],
+        ['Intro to Computer Engineering', 'Spring 2019', true],
+        ['Seminar: Intro to Computer Science', 'Spring 2019',  false],
+        ['Logic and Discrete Mathematics', 'Fall 2019', true],
+        ['Data Structures and Algorithms', 'Fall 2019',  true],
+        ['Web Development', 'Spring 2020', false],
+        ['Programming Tools and Techniques', 'Spring 2020',  false],
+        ['Seminar: Data Structures and Algorithms', 'Spring 2020',  false]
+    ]);
+
+    var table = new google.visualization.Table(document.getElementById('table-container'));
+
+    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    }
